@@ -1,59 +1,58 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/31l6ynm0a1fhr2vs/branch/master?svg=true)](https://ci.appveyor.com/project/mrpond/blockthespot/branch/master)  [![Discord](https://discord.com/api/guilds/807273906872123412/widget.png)](https://discord.gg/eYudMwgYtY) <img src="https://img.shields.io/github/downloads/mrpond/blockthespot/total.svg" />
+[![构建状态](https://ci.appveyor.com/api/projects/status/31l6ynm0a1fhr2vs/branch/master?svg=true)](https://ci.appveyor.com/project/mrpond/blockthespot/branch/master)  [![Discord](https://discord.com/api/guilds/807273906872123412/widget.png)](https://discord.gg/eYudMwgYtY) <img src="https://img.shields.io/github/downloads/mrpond/blockthespot/total.svg" />
 
 <center>
     <h1 align="center">BlockTheSpot</h1>
-    <h4 align="center">A multi-purpose adblocker and skip-bypass for the <strong>Spotify for Windows (64 bit)</strong> </h4>
-    <h5 align="center">Please support Spotify by purchasing premium</h5>
+    <h4 align="center">一个适用于 <strong>Spotify Windows (64位)</strong> 的多功能广告拦截器和跳过器</h4>
+    <h5 align="center">请通过购买高级会员来支持 Spotify</h5>
     <p align="center">
-        <strong>Last updated:</strong> 25 August 2025<br>
-        <strong>Last tested version:</strong> Spotify for Windows (64 bit) 1.2.71.421.g794ff5e5
-    </p> 
+        <strong>最后更新日期:</strong> 2025年8月25日<br>
+        <strong>最后测试版本:</strong> Spotify for Windows (64 bit) 1.2.71.421.g794ff5e5
+    </p>
 </center>
 
-### Virus warning on windows defender issue:
-* the code is on Github, everyone can check it.
-* BTS utilize Appveyor, https://www.appveyor.com/.
-* Any code change on Github, Appveyor will build it and make release on Github.
-* false positive can happen. but don't trust me on this, try verify by compile your own BTS and compare with the release.
+### Windows Defender 病毒警告问题：
+* 代码在 Github 上，任何人都可以查看。
+* BTS 使用 Appveyor，https://www.appveyor.com/。
+* Github 上的任何代码更改，Appveyor 都会进行构建并在 Github 上发布。
+* 误报是可能发生的。但不要完全相信我的话，尝试自己编译 BTS 并与发布版本进行比较来验证。
 
-### Features:
-* Unlocks most premium features except downloads and "Your DJ"
-* Lives through Spotify updates. No need to patch Spotify after every update anymore.
+### 功能：
+* 解锁大部分高级会员功能，但不支持下载和“你的DJ”功能
+* 可以在 Spotify 更新后继续使用。不再需要在每次更新后重新打补丁。
 
-#### Experimental features from developer mode
-- Click on the 2 dots in the top left corner of Spotify > Develop > Show debug window. Play around with the options.
-- Enable/disable feature by yourself in realtime and on demand.
-- Choose old/new theme(YLX).
-- Enable right sidebar.
-- Hide upgrade button on top bar.
+#### 开发者模式中的实验性功能
+- 点击 Spotify 左上角的两个点 > 开发者(Develop) > 显示调试窗口(Show debug window)。试着玩玩这些选项。
+- 实时按需启用/禁用功能。
+- 选择旧/新主题(YLX)。
+- 启用右侧边栏。
+- 隐藏顶部栏的升级按钮。
 
-:warning: This mod is for the [**Desktop Application**](https://www.spotify.com/download/windows/) of Spotify on Windows only and **not the Microsoft Store version**.
+:warning: 此模组仅适用于 Windows 的 [**桌面应用版本**](https://www.spotify.com/download/windows/)，**不适用于微软商店版本**。
 
-### Installation/Update:
-* Just download and run [BlockTheSpot.bat](https://raw.githack.com/mrpond/BlockTheSpot/master/BlockTheSpot.bat)
+### 安装/更新：
+* 只需下载并运行 [BlockTheSpot.bat](https://raw.githack.com/mrpond/BlockTheSpot/master/BlockTheSpot.bat)
 
-or
+或者
 
-#### Fully automated installation via PowerShell
-
+#### 通过 PowerShell 全自动安装
 ```powershell
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-Expression "& { $(Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/Maolaohei/BlockTheSpot/master/install.ps1') } -UninstallSpotifyStoreEdition -UpdateSpotify"
 ```
 
 #### Manual installation/update
 
-1. Browse to your Spotify installation folder `%APPDATA%\Spotify`
-2. Download `chrome_elf.zip` from [releases](https://github.com/mrpond/BlockTheSpot/releases)
-3. Unzip `dpapi.dll` and `config.ini` to Spotify directory. 
-4. Download latest [blockthespot_settings.json](https://github.com/mrpond/BlockTheSpot/master/blockthespot_settings.json) from github to Spotify directory. 
+1.浏览到您的 Spotify 安装文件夹 %APPDATA%\Spotify
+2.从 发布页面 下载 chrome_elf.zip
+3.将 dpapi.dll 和 config.ini 解压到 Spotify 目录。
+4.从 Github 下载最新的 blockthespot_settings.json 到 Spotify 目录。  
 ### Uninstall:
-* Just run [uninstall.bat](https://raw.githack.com/mrpond/BlockTheSpot/master/uninstall.bat)
+* 只需运行 uninstall.bat(https://raw.githack.com/mrpond/BlockTheSpot/master/uninstall.bat)
 or
-* Remove `dpapi.dll` and `config.ini` from Spotify directory.
+* 从 Spotify 目录中删除 dpapi.dll 和 config.ini。
 or
-* Reinstall Spotify
+* 重新安装 Spotify
 
-#### BlockTheSpot with Spicetify Installation/Update:
+#### BlockTheSpot 与 Spicetify 一起安装/更新:
 
 * Just download and run [BlockTheSpot + Spicetify.bat](https://raw.githack.com/mrpond/BlockTheSpot/master/BlockTheSpot%20%2B%20Spicetify.bat) then answer the prompts when given
 
