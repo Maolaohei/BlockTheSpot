@@ -9,6 +9,13 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	LPVOID lpReserved
 )
 {
+	wchar_t path[MAX_PATH];
+	GetModuleFileNameW(NULL, path, MAX_PATH);
+	if (0 == _wcslwr_s(path)) {
+		if (NULL == wcsstr(path, L"spotify.exe")) {
+			return TRUE;
+		}
+	}
 	if (DLL_PROCESS_ATTACH == ul_reason_for_call) {
 		DisableThreadLibraryCalls(hModule);
 		LPWSTR cmd = GetCommandLineW();
