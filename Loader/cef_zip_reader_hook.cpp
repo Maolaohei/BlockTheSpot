@@ -4,9 +4,10 @@
 #include "log_thread.h"
 #include "pattern.h"
 #include "IAT_hook.h"
+#include <new>
 
 static inline size_t cef_buffer_modify_count = 0;
-static inline char cef_buffer_list[MAX_CEF_BUFFER_MODIFY_LIST][MAX_URL_LEN] = {};
+//static inline char cef_buffer_list[MAX_CEF_BUFFER_MODIFY_LIST][MAX_URL_LEN] = {};
 
 using cef_zip_reader_create_t = void* (*)(void* stream);
 static inline cef_zip_reader_create_t cef_zip_reader_create_orig = nullptr;
@@ -33,7 +34,7 @@ static inline bool do_patch_buffer(const char* file_name, const char* patch_name
 	Modify modify[PAIR_MODIFY] = {};
 
 	bool is_pair = true;
-	char temp_buffer[SHARED_BUFFER_SIZE];
+	char* temp_buffer = new (std::nothrow) char[SHARED_BUFFER_SIZE]();
 
 	for (size_t i = 0; i < PAIR_MODIFY; ++i) {
 		const size_t display_idx = i + 1;
@@ -109,6 +110,9 @@ static inline bool do_patch_buffer(const char* file_name, const char* patch_name
 			break;
 		}
 	}
+
+	delete[] temp_buffer;
+	temp_buffer = nullptr;
 
 	if (false == is_pair) {
 		const auto address = FindPattern(
@@ -283,6 +287,9 @@ static inline bool is_cef_reader_hook() noexcept
 
 void hook_cef_reader(HMODULE libcef_dll_handle) noexcept
 {
+	cef_buffer_list = new (std::nothrow)
+		char[MAX_CEF_BUFFER_MODIFY_LIST][MAX_URL_LEN]();
+
 	cef_zip_reader_create_orig =
 		reinterpret_cast<cef_zip_reader_create_t>(
 			GetProcAddress_orig(libcef_dll_handle, "cef_zip_reader_create"));

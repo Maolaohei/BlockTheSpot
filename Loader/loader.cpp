@@ -6,7 +6,7 @@
 #include "cef_url_hook.h"
 #include "cef_zip_reader_hook.h"
 #include "libcef_hook.h"
-#pragma	comment(lib, "version.lib")
+#include <new>
 
 bool remove_debug_log() noexcept
 {
@@ -79,6 +79,7 @@ VOID CALLBACK bts_main(ULONG_PTR param)
 	//  Spotify's main process
 	if (NULL == wcsstr(cmd, L"--type=") &&
 		NULL == wcsstr(cmd, L"--url=")) {
+		shared_buffer = new (std::nothrow) char[SHARED_BUFFER_SIZE]();
 		init_log_thread();
 		if (false == is_chrome_elf_required_exist()) {
 			log_info("chrome_elf_required.dll file not found, Did you skip something?");
@@ -105,6 +106,7 @@ VOID CALLBACK bts_main(ULONG_PTR param)
 
 		hook_developer_mode(spotify_dll_handle);
 		libcef_IAT_hook_GetProcAddress(spotify_dll_handle);
+
 		hook_cef_url(libcef_dll_handle);
 		hook_cef_reader(libcef_dll_handle);	// not finished yet.
 		// FlushInstructionCache(GetCurrentProcess(), nullptr, 0);

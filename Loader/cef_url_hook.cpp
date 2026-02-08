@@ -4,8 +4,11 @@
 #include "log_thread.h"
 #include "IAT_hook.h"
 
+#include <new>
+
+
 static inline size_t cef_block_count = 0;
-static inline char cef_block_list[MAX_CEF_BLOCK_LIST][MAX_URL_LEN] = {};
+//static inline char cef_block_list[MAX_CEF_BLOCK_LIST][MAX_URL_LEN] = {};
 
 using cef_urlrequest_create_t = void* (*)(void* request, void* client, void* request_context);
 static inline cef_urlrequest_create_t cef_urlrequest_create_orig = nullptr;
@@ -131,6 +134,9 @@ static inline void load_cef_url_config()
 
 void hook_cef_url(HMODULE libcef_dll_handle) noexcept
 {
+	cef_block_list = new (std::nothrow)
+		char[MAX_CEF_BLOCK_LIST][MAX_URL_LEN]();
+
 	cef_urlrequest_create_orig =
 		reinterpret_cast<cef_urlrequest_create_t>(
 			GetProcAddress_orig(libcef_dll_handle, "cef_urlrequest_create"));
