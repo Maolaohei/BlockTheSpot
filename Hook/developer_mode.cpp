@@ -1,4 +1,5 @@
-﻿#include "developer_mode.h"
+﻿#include "pch.h"
+#include "developer_mode.h"
 #include "loader.h"
 #include "pattern.h"
 #include "memory.h"

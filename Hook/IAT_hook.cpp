@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "IAT_hook.h"
 #include "WinTrust_hook.h"
 

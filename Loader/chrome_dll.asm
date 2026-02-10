@@ -38,7 +38,7 @@ IFDEF RAX ; # 64-bit
         pop rax
     ENDM
 
-    EXTERNDEF load_api:PROC
+    EXTERNDEF LoadAPI:PROC
 
     API_EXPORT_ORIG MACRO API_NAME:REQ
         .DATA
@@ -49,7 +49,7 @@ IFDEF RAX ; # 64-bit
             PUSH_ALL
             sub rsp, 8
             mov rcx, OFFSET S_&API_NAME
-            call load_api
+            call LoadAPI
             mov _&API_NAME, rax
             add rsp, 8
             POP_ALL
@@ -57,7 +57,7 @@ IFDEF RAX ; # 64-bit
         &API_NAME ENDP
     ENDM
 
-    API_EXPORT_ORIG ClearReportsBetween_ExportThunk
+ API_EXPORT_ORIG ClearReportsBetween_ExportThunk
     API_EXPORT_ORIG CrashForException_ExportThunk
     API_EXPORT_ORIG DisableHook
     API_EXPORT_ORIG DrainLog
@@ -86,7 +86,6 @@ IFDEF RAX ; # 64-bit
     API_EXPORT_ORIG SetUploadConsent_ExportThunk
     API_EXPORT_ORIG SignalChromeElf
     API_EXPORT_ORIG SignalInitializeCrashReporting
-
 
 ENDIF
 

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "pattern.h"
 
 struct Hex_table

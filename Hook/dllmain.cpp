@@ -1,37 +1,17 @@
-#include "loader.h"
+// dllmain.cpp : Defines the entry point for the DLL application.
+#include "pch.h"
 #include "kill_crashpad.h"
 #include "log_thread.h"
 
-// QueueUserAPC via DLL Main instead of CreateThread
-// Ready for loader in the future.
-BOOL APIENTRY DllMain(HMODULE hModule,
-	DWORD  ul_reason_for_call,
-	LPVOID lpReserved
-)
+BOOL APIENTRY DllMain( HMODULE hModule,
+                       DWORD  ul_reason_for_call,
+                       LPVOID lpReserved
+                     )
 {
-	wchar_t path[MAX_PATH];
-	GetModuleFileNameW(NULL, path, MAX_PATH);
-	if (0 == _wcslwr_s(path)) {
-		if (NULL == wcsstr(path, L"spotify.exe")) {
-			return TRUE;
-		}
-	}
 	if (DLL_PROCESS_ATTACH == ul_reason_for_call) {
 		DisableThreadLibraryCalls(hModule);
 		LPWSTR cmd = GetCommandLineW();
-#ifdef USE_THREAD
-		HANDLE thread = CreateThread(
-			nullptr,
-			0,
-			reinterpret_cast<LPTHREAD_START_ROUTINE>(bts_main),
-			reinterpret_cast<LPVOID>(cmd),
-			0,
-			nullptr
-		);
-		if (thread) {
-			CloseHandle(thread);
-		}
-#elif defined(USE_APC)
+#ifdef USE_APC
 		QueueUserAPC(
 			bts_main,
 			GetCurrentThread(),
@@ -57,3 +37,4 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	}
 	return TRUE;
 }
+

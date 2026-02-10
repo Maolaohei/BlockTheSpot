@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "memory.h"
 
 void patch_instruction(LPVOID* lpAddress, void* value, SIZE_T patch_size)

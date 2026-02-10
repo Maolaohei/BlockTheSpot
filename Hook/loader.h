@@ -1,23 +1,11 @@
 #pragma once
-#define _CRT_SECURE_CPP_NOTHROW
-#define WIN32_LEAN_AND_MEAN
-#define NOMINMAX
-#include <Windows.h>
-#include <winternl.h>
-#include <cstdint>
-#include <cstdio>
-
+#include "pch.h"
 #define USE_APC
-//#define USE_THREAD
 
-#if defined(USE_THREAD) && defined(USE_APC)
-#error "Cannot define both USE_THREAD and USE_APC"
-#endif
-
-inline constexpr auto ORIGINAL_CHROME_ELF_DLL = L"chrome_elf_required.dll";
-inline constexpr auto CONFIG_FILEW = L".\\config.ini";
-inline constexpr auto CONFIG_FILEA = ".\\config.ini";
-inline constexpr auto LOG_FILEW = L".\\fucking.log";
+inline constexpr auto ORIGINAL_CHROME_ELF_DLL = L"./chrome_elf_required.dll";
+inline constexpr auto CONFIG_FILEW = L"./config.ini";
+inline constexpr auto CONFIG_FILEA = "./config.ini";
+inline constexpr auto LOG_FILEW = L"./fucking.log";
 
 using ImageDirectoryEntryToDataEx_t = PVOID(WINAPI*)(
 	PVOID Base,
@@ -30,8 +18,7 @@ using ImageDirectoryEntryToDataEx_t = PVOID(WINAPI*)(
 inline ImageDirectoryEntryToDataEx_t ImageDirectoryEntryToDataEx = nullptr;
 
 constexpr size_t SHARED_BUFFER_SIZE = 1024; // increase if need.
-//inline char shared_buffer[SHARED_BUFFER_SIZE];
-inline char* shared_buffer = nullptr;
+inline char shared_buffer[SHARED_BUFFER_SIZE];
 
 constexpr size_t MAX_CEF_BLOCK_LIST = 5;
 constexpr size_t MAX_CEF_BUFFER_MODIFY_LIST = 10;

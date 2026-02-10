@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "WinTrust_hook.h"
 
 // https://learn.microsoft.com/en-us/windows/win32/seccrypto/example-c-program--verifying-the-signature-of-a-pe-file

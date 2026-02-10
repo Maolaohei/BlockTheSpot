@@ -1,7 +1,5 @@
+#include "pch.h"
 #include "log_thread.h"
-#include "cef_url_hook.h"
-#include "cef_zip_reader_hook.h"
-#include <new>
 
 constexpr size_t LOG_RING_SIZE = 512;   // number of messages
 constexpr size_t LOG_MSG_SIZE = 256;   // bytes per message
@@ -24,7 +22,7 @@ struct Log_work
 	DWORD log_thread_id = 0;
 	bool log_enable = false;
 	Log_level log_level = Log_level::NONE;
-	Log_entry* buffer = nullptr;
+	Log_entry buffer[LOG_RING_SIZE]{};
 	size_t write = 0;
 	size_t read = 0;
 };
@@ -187,7 +185,6 @@ static inline void log_info_impl(const char* message) noexcept
 
 void init_log_thread() noexcept
 {
-
 	logger.log_level = static_cast<Log_level>(GetPrivateProfileIntA(
 		"Log",
 		"Level",
@@ -199,8 +196,6 @@ void init_log_thread() noexcept
 		OutputDebugStringW(L"init_log_thread: log disable!\n");
 		return;
 	}
-
-	logger.buffer = new (std::nothrow) Log_entry[LOG_RING_SIZE]();
 
 	log_info = log_info_impl;
 	if (Log_level::DEBUG == logger.log_level) {
@@ -268,23 +263,6 @@ void init_log_thread() noexcept
 
 void stop_log() noexcept
 {
-	if (nullptr != logger.buffer) {
-		delete[] logger.buffer;
-		logger.buffer = nullptr;
-	}
-
-	if (nullptr != cef_block_list) {
-		delete[] cef_block_list;
-		cef_block_list = nullptr;
-	}
-	if (nullptr != cef_buffer_list) {
-		delete[] cef_buffer_list;
-		cef_buffer_list = nullptr;
-	}
-	if (nullptr != shared_buffer) {
-		delete[] shared_buffer;
-		shared_buffer = nullptr;
-	}
 	if (Log_level::NONE == logger.log_level) {
 		return;
 	}

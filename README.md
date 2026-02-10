@@ -3,7 +3,7 @@
 	<h4 align="center">A multi-purpose adblocker and skip-bypass for the <strong>Spotify for Windows (64 bit)</strong> </h4>
     <h5 align="center">Please support Spotify by purchasing premium</h5>
     <p align="center">
-        <strong>Last updated:</strong> 8 February 2026 (Beta!)<br>
+        <strong>Last updated:</strong> 10 February 2026 (Beta!)<br>
         <strong>Last tested version:</strong> Spotify for Windows (64 bit) 1.2.83.453.g1fae877b
     </p> 
 </center>
@@ -25,19 +25,19 @@
 1. Browse to your Spotify installation folder `%APPDATA%\Spotify`
 2. Rename `chrome_elf.dll` to `chrome_elf_required.dll`
 3. Download `BlockTheSpot.zip` from [releases](https://github.com/mrpond/BlockTheSpot/releases)
-4. Unzip `chrome_elf.dll` and `config.ini` to Spotify directory. 
+4. Unzip `chrome_elf.dll`, `blockthespot.dll` and `config.ini` to Spotify directory. 
 5. Download latest [config.ini](https://github.com/mrpond/BlockTheSpot/blob/master/config.ini) from github to Spotify directory. 
 
 #### Update from spotify
 1. Browse to your Spotify installation folder `%APPDATA%\Spotify`
-2. Delete `chrome_elf_required.dll`
+2. Delete `chrome_elf_required.dll` and `blockthespot.dll`
 2. Rename `chrome_elf.dll` to `chrome_elf_required.dll`
 3. Download `BlockTheSpot.zip` from [releases](https://github.com/mrpond/BlockTheSpot/releases)
-4. Unzip `chrome_elf.dll` and `config.ini` to Spotify directory. 
+4. Unzip `chrome_elf.dll`, `blockthespot.dll` and `config.ini` to Spotify directory. 
 5. Download latest [config.ini](https://github.com/mrpond/BlockTheSpot/blob/master/config.ini) from github to Spotify directory. 
 
 ### Uninstall:
-1. Remove `chrome_elf.dll` and `config.ini` from Spotify directory.
+1. Remove `chrome_elf.dll`, `blockthespot.dll` and `config.ini` from Spotify directory.
 2. Rename `chrome_elf_required.dll` to `chrome_elf.dll`
 
 or just reinstall Spotify
