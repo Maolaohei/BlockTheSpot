@@ -5,6 +5,7 @@
 #include "log_thread.h"
 #include "pattern.h"
 #include "IAT_hook.h"
+#include "css_cosmetic.h"
 
 static inline size_t cef_buffer_modify_count = 0;
 static inline char cef_buffer_list[MAX_CEF_BUFFER_MODIFY_LIST][MAX_URL_LEN] = {};
@@ -195,6 +196,7 @@ int CALLBACK cef_zip_reader_read_file_hook(void* self, void* buffer, size_t buff
 	if (true == do_patch) {
 		patch_file(ansi_file_name, buffer, bufferSize);
 	}
+	css_hide_vbar(ansi_file_name, buffer, bufferSize);
 
 	return _retval;
 }

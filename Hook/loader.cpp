@@ -7,6 +7,7 @@
 #include "cef_url_hook.h"
 #include "cef_zip_reader_hook.h"
 #include "libcef_hook.h"
+#include "css_cosmetic.h"
 #pragma	comment(lib, "version.lib")
 
 bool remove_debug_log() noexcept
@@ -106,6 +107,7 @@ VOID CALLBACK bts_main(ULONG_PTR param)
 		libcef_IAT_hook_GetProcAddress(spotify_dll_handle);
 		hook_cef_url(libcef_dll_handle);
 		hook_cef_reader(libcef_dll_handle);	// not finished yet.
+		modify_css_init();
 		// FlushInstructionCache(GetCurrentProcess(), nullptr, 0);
 		log_info("Loader initialized successfully.");
 	}
