@@ -21,7 +21,7 @@ static inline void do_hide_vbar(const char* file_name, void* buffer, size_t buff
 {
 	static char vbar_buffer[2048]{};
 	size_t len = strnlen_s(file_name, 128);
-	if (len < 4 || 0 != _stricmp(file_name + len - 4, ".css")) {
+	if (len < 4 || 0 != lstrcmpiA(file_name + len - 4, ".css")) {
 		return;
 	}
 	
